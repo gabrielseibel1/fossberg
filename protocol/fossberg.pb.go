@@ -20,17 +20,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// The request message containing the user's name.
-type HelloRequest struct {
+type EnterGameRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 }
 
-func (x *HelloRequest) Reset() {
-	*x = HelloRequest{}
+func (x *EnterGameRequest) Reset() {
+	*x = EnterGameRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_protocol_fossberg_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -38,13 +37,13 @@ func (x *HelloRequest) Reset() {
 	}
 }
 
-func (x *HelloRequest) String() string {
+func (x *EnterGameRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HelloRequest) ProtoMessage() {}
+func (*EnterGameRequest) ProtoMessage() {}
 
-func (x *HelloRequest) ProtoReflect() protoreflect.Message {
+func (x *EnterGameRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_protocol_fossberg_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,29 +55,30 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
-func (*HelloRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use EnterGameRequest.ProtoReflect.Descriptor instead.
+func (*EnterGameRequest) Descriptor() ([]byte, []int) {
 	return file_protocol_fossberg_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *HelloRequest) GetName() string {
+func (x *EnterGameRequest) GetUsername() string {
 	if x != nil {
-		return x.Name
+		return x.Username
 	}
 	return ""
 }
 
-// The response message containing the greetings
-type HelloReply struct {
+type EnterGameResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	X int64 `protobuf:"varint,1,opt,name=x,proto3" json:"x,omitempty"`
+	Y int64 `protobuf:"varint,2,opt,name=y,proto3" json:"y,omitempty"`
+	Z int64 `protobuf:"varint,3,opt,name=z,proto3" json:"z,omitempty"`
 }
 
-func (x *HelloReply) Reset() {
-	*x = HelloReply{}
+func (x *EnterGameResponse) Reset() {
+	*x = EnterGameResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_protocol_fossberg_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -86,13 +86,13 @@ func (x *HelloReply) Reset() {
 	}
 }
 
-func (x *HelloReply) String() string {
+func (x *EnterGameResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HelloReply) ProtoMessage() {}
+func (*EnterGameResponse) ProtoMessage() {}
 
-func (x *HelloReply) ProtoReflect() protoreflect.Message {
+func (x *EnterGameResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_protocol_fossberg_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -104,35 +104,216 @@ func (x *HelloReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HelloReply.ProtoReflect.Descriptor instead.
-func (*HelloReply) Descriptor() ([]byte, []int) {
+// Deprecated: Use EnterGameResponse.ProtoReflect.Descriptor instead.
+func (*EnterGameResponse) Descriptor() ([]byte, []int) {
 	return file_protocol_fossberg_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *HelloReply) GetMessage() string {
+func (x *EnterGameResponse) GetX() int64 {
 	if x != nil {
-		return x.Message
+		return x.X
+	}
+	return 0
+}
+
+func (x *EnterGameResponse) GetY() int64 {
+	if x != nil {
+		return x.Y
+	}
+	return 0
+}
+
+func (x *EnterGameResponse) GetZ() int64 {
+	if x != nil {
+		return x.Z
+	}
+	return 0
+}
+
+type FireRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	X1       int64  `protobuf:"varint,2,opt,name=x1,proto3" json:"x1,omitempty"`
+	Y1       int64  `protobuf:"varint,3,opt,name=y1,proto3" json:"y1,omitempty"`
+	Z1       int64  `protobuf:"varint,4,opt,name=z1,proto3" json:"z1,omitempty"`
+	X2       int64  `protobuf:"varint,5,opt,name=x2,proto3" json:"x2,omitempty"`
+	Y2       int64  `protobuf:"varint,6,opt,name=y2,proto3" json:"y2,omitempty"`
+	Z2       int64  `protobuf:"varint,7,opt,name=z2,proto3" json:"z2,omitempty"`
+}
+
+func (x *FireRequest) Reset() {
+	*x = FireRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protocol_fossberg_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FireRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FireRequest) ProtoMessage() {}
+
+func (x *FireRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protocol_fossberg_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FireRequest.ProtoReflect.Descriptor instead.
+func (*FireRequest) Descriptor() ([]byte, []int) {
+	return file_protocol_fossberg_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *FireRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
 	}
 	return ""
+}
+
+func (x *FireRequest) GetX1() int64 {
+	if x != nil {
+		return x.X1
+	}
+	return 0
+}
+
+func (x *FireRequest) GetY1() int64 {
+	if x != nil {
+		return x.Y1
+	}
+	return 0
+}
+
+func (x *FireRequest) GetZ1() int64 {
+	if x != nil {
+		return x.Z1
+	}
+	return 0
+}
+
+func (x *FireRequest) GetX2() int64 {
+	if x != nil {
+		return x.X2
+	}
+	return 0
+}
+
+func (x *FireRequest) GetY2() int64 {
+	if x != nil {
+		return x.Y2
+	}
+	return 0
+}
+
+func (x *FireRequest) GetZ2() int64 {
+	if x != nil {
+		return x.Z2
+	}
+	return 0
+}
+
+type FireResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Hit bool  `protobuf:"varint,1,opt,name=hit,proto3" json:"hit,omitempty"`
+	Dmg int32 `protobuf:"varint,2,opt,name=dmg,proto3" json:"dmg,omitempty"`
+}
+
+func (x *FireResponse) Reset() {
+	*x = FireResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protocol_fossberg_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FireResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FireResponse) ProtoMessage() {}
+
+func (x *FireResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protocol_fossberg_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FireResponse.ProtoReflect.Descriptor instead.
+func (*FireResponse) Descriptor() ([]byte, []int) {
+	return file_protocol_fossberg_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *FireResponse) GetHit() bool {
+	if x != nil {
+		return x.Hit
+	}
+	return false
+}
+
+func (x *FireResponse) GetDmg() int32 {
+	if x != nil {
+		return x.Dmg
+	}
+	return 0
 }
 
 var File_protocol_fossberg_proto protoreflect.FileDescriptor
 
 var file_protocol_fossberg_proto_rawDesc = []byte{
 	0x0a, 0x17, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f, 0x66, 0x6f, 0x73, 0x73, 0x62,
-	0x65, 0x72, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x22, 0x0a, 0x0c, 0x48, 0x65, 0x6c,
-	0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x26, 0x0a,
-	0x0a, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x6d,
-	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0x33, 0x0a, 0x07, 0x47, 0x72, 0x65, 0x65, 0x74, 0x65, 0x72,
-	0x12, 0x28, 0x0a, 0x08, 0x53, 0x61, 0x79, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x0d, 0x2e, 0x48,
-	0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0b, 0x2e, 0x48, 0x65,
-	0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x2d, 0x5a, 0x2b, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x61, 0x62, 0x72, 0x69, 0x65, 0x6c,
-	0x73, 0x65, 0x69, 0x62, 0x65, 0x6c, 0x31, 0x2f, 0x66, 0x6f, 0x73, 0x73, 0x62, 0x65, 0x72, 0x67,
-	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x65, 0x72, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x2e, 0x0a, 0x10, 0x45, 0x6e, 0x74,
+	0x65, 0x72, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a,
+	0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x3d, 0x0a, 0x11, 0x45, 0x6e, 0x74,
+	0x65, 0x72, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0c,
+	0x0a, 0x01, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x78, 0x12, 0x0c, 0x0a, 0x01,
+	0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x79, 0x12, 0x0c, 0x0a, 0x01, 0x7a, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x7a, 0x22, 0x89, 0x01, 0x0a, 0x0b, 0x46, 0x69, 0x72,
+	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x78, 0x31, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x02, 0x78, 0x31, 0x12, 0x0e, 0x0a, 0x02, 0x79, 0x31, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x02, 0x79, 0x31, 0x12, 0x0e, 0x0a, 0x02, 0x7a, 0x31, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x02, 0x7a, 0x31, 0x12, 0x0e, 0x0a, 0x02, 0x78, 0x32, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x02, 0x78, 0x32, 0x12, 0x0e, 0x0a, 0x02, 0x79, 0x32, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x02, 0x79, 0x32, 0x12, 0x0e, 0x0a, 0x02, 0x7a, 0x32, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x02, 0x7a, 0x32, 0x22, 0x32, 0x0a, 0x0c, 0x46, 0x69, 0x72, 0x65, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x68, 0x69, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x03, 0x68, 0x69, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x64, 0x6d, 0x67, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x03, 0x64, 0x6d, 0x67, 0x32, 0x6a, 0x0a, 0x0b, 0x47, 0x61, 0x6d, 0x65,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x34, 0x0a, 0x09, 0x45, 0x6e, 0x74, 0x65, 0x72,
+	0x47, 0x61, 0x6d, 0x65, 0x12, 0x11, 0x2e, 0x45, 0x6e, 0x74, 0x65, 0x72, 0x47, 0x61, 0x6d, 0x65,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x45, 0x6e, 0x74, 0x65, 0x72, 0x47,
+	0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x25, 0x0a,
+	0x04, 0x46, 0x69, 0x72, 0x65, 0x12, 0x0c, 0x2e, 0x46, 0x69, 0x72, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x46, 0x69, 0x72, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x42, 0x2d, 0x5a, 0x2b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x67, 0x61, 0x62, 0x72, 0x69, 0x65, 0x6c, 0x73, 0x65, 0x69, 0x62, 0x65, 0x6c,
+	0x31, 0x2f, 0x66, 0x6f, 0x73, 0x73, 0x62, 0x65, 0x72, 0x67, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x63, 0x6f, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -147,16 +328,20 @@ func file_protocol_fossberg_proto_rawDescGZIP() []byte {
 	return file_protocol_fossberg_proto_rawDescData
 }
 
-var file_protocol_fossberg_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_protocol_fossberg_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_protocol_fossberg_proto_goTypes = []interface{}{
-	(*HelloRequest)(nil), // 0: HelloRequest
-	(*HelloReply)(nil),   // 1: HelloReply
+	(*EnterGameRequest)(nil),  // 0: EnterGameRequest
+	(*EnterGameResponse)(nil), // 1: EnterGameResponse
+	(*FireRequest)(nil),       // 2: FireRequest
+	(*FireResponse)(nil),      // 3: FireResponse
 }
 var file_protocol_fossberg_proto_depIdxs = []int32{
-	0, // 0: Greeter.SayHello:input_type -> HelloRequest
-	1, // 1: Greeter.SayHello:output_type -> HelloReply
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 0: GameService.EnterGame:input_type -> EnterGameRequest
+	2, // 1: GameService.Fire:input_type -> FireRequest
+	1, // 2: GameService.EnterGame:output_type -> EnterGameResponse
+	3, // 3: GameService.Fire:output_type -> FireResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -169,7 +354,7 @@ func file_protocol_fossberg_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_protocol_fossberg_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloRequest); i {
+			switch v := v.(*EnterGameRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -181,7 +366,31 @@ func file_protocol_fossberg_proto_init() {
 			}
 		}
 		file_protocol_fossberg_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HelloReply); i {
+			switch v := v.(*EnterGameResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protocol_fossberg_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FireRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protocol_fossberg_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FireResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -199,7 +408,7 @@ func file_protocol_fossberg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_protocol_fossberg_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

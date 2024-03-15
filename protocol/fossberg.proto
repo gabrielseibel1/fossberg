@@ -2,18 +2,32 @@ syntax = "proto3";
 
 option go_package = "github.com/gabrielseibel1/fossberg/protocol";
 
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+service GameService {
+  rpc EnterGame(EnterGameRequest) returns (EnterGameResponse) {}
+  rpc Fire(FireRequest) returns (FireResponse) {}
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+message EnterGameRequest {
+  string username = 1;
 }
 
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
+message EnterGameResponse {
+  int64 x = 1;
+  int64 y = 2;
+  int64 z = 3;
+}
+
+message FireRequest {
+  string username = 1;
+  int64 x1 = 2;
+  int64 y1 = 3;
+  int64 z1 = 4;
+  int64 x2 = 5;
+  int64 y2 = 6;
+  int64 z2 = 7;
+}
+
+message FireResponse {
+  bool hit = 1;
+  int32 dmg = 2;
 }

@@ -31,12 +31,19 @@ import (
 )
 
 const (
-	defaultName = "world"
+	defaultName = "Newbie"
 )
 
 var (
 	addr = flag.String("addr", "localhost:50051", "the address to connect to")
 	name = flag.String("name", defaultName, "Name to greet")
+)
+
+type point struct{ x, y, z int64 }
+
+var (
+	player point
+	guntip point
 )
 
 func main() {
@@ -47,14 +54,29 @@ func main() {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
-	c := pb.NewGreeterClient(conn)
+	c := pb.NewGameServiceClient(conn)
+
+	username := *name
 
 	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: *name})
+
+	// Join game
+	enterRequest := pb.EnterGameRequest{Username: username}
+	spawn, err := c.EnterGame(ctx, &enterRequest)
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)
+		log.Fatalf("could not enter game: %v", err)
 	}
-	log.Printf("Greeting: %s", r.GetMessage())
+	player.x, player.y, player.z = spawn.GetX(), spawn.GetY(), spawn.GetZ()
+	log.Printf("[EnterGame] %s -> %+v", enterRequest.String(), player)
+
+	// Fire a shot
+	guntip.x, guntip.y, guntip.z = player.x+1, player.y+2, player.z+3
+	fireRequest := pb.FireRequest{Username: username, X1: player.x, Y1: player.y, Z1: player.z, X2: guntip.x, Y2: guntip.y + 2, Z2: guntip.z + 3}
+	shot, err := c.Fire(ctx, &fireRequest)
+	if err != nil {
+		log.Fatalf("could not fire: %v", err)
+	}
+	log.Printf("[Fire] %+v-%+v -> %s", player, guntip, shot.String())
 }

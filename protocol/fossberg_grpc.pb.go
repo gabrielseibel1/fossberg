@@ -18,88 +18,122 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// GreeterClient is the client API for Greeter service.
+// GameServiceClient is the client API for GameService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GreeterClient interface {
-	// Sends a greeting
-	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
+type GameServiceClient interface {
+	EnterGame(ctx context.Context, in *EnterGameRequest, opts ...grpc.CallOption) (*EnterGameResponse, error)
+	Fire(ctx context.Context, in *FireRequest, opts ...grpc.CallOption) (*FireResponse, error)
 }
 
-type greeterClient struct {
+type gameServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
-	return &greeterClient{cc}
+func NewGameServiceClient(cc grpc.ClientConnInterface) GameServiceClient {
+	return &gameServiceClient{cc}
 }
 
-func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
-	out := new(HelloReply)
-	err := c.cc.Invoke(ctx, "/Greeter/SayHello", in, out, opts...)
+func (c *gameServiceClient) EnterGame(ctx context.Context, in *EnterGameRequest, opts ...grpc.CallOption) (*EnterGameResponse, error) {
+	out := new(EnterGameResponse)
+	err := c.cc.Invoke(ctx, "/GameService/EnterGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// GreeterServer is the server API for Greeter service.
-// All implementations must embed UnimplementedGreeterServer
+func (c *gameServiceClient) Fire(ctx context.Context, in *FireRequest, opts ...grpc.CallOption) (*FireResponse, error) {
+	out := new(FireResponse)
+	err := c.cc.Invoke(ctx, "/GameService/Fire", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// GameServiceServer is the server API for GameService service.
+// All implementations must embed UnimplementedGameServiceServer
 // for forward compatibility
-type GreeterServer interface {
-	// Sends a greeting
-	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
-	mustEmbedUnimplementedGreeterServer()
+type GameServiceServer interface {
+	EnterGame(context.Context, *EnterGameRequest) (*EnterGameResponse, error)
+	Fire(context.Context, *FireRequest) (*FireResponse, error)
+	mustEmbedUnimplementedGameServiceServer()
 }
 
-// UnimplementedGreeterServer must be embedded to have forward compatible implementations.
-type UnimplementedGreeterServer struct {
+// UnimplementedGameServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedGameServiceServer struct {
 }
 
-func (UnimplementedGreeterServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
+func (UnimplementedGameServiceServer) EnterGame(context.Context, *EnterGameRequest) (*EnterGameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnterGame not implemented")
 }
-func (UnimplementedGreeterServer) mustEmbedUnimplementedGreeterServer() {}
+func (UnimplementedGameServiceServer) Fire(context.Context, *FireRequest) (*FireResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Fire not implemented")
+}
+func (UnimplementedGameServiceServer) mustEmbedUnimplementedGameServiceServer() {}
 
-// UnsafeGreeterServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GreeterServer will
+// UnsafeGameServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to GameServiceServer will
 // result in compilation errors.
-type UnsafeGreeterServer interface {
-	mustEmbedUnimplementedGreeterServer()
+type UnsafeGameServiceServer interface {
+	mustEmbedUnimplementedGameServiceServer()
 }
 
-func RegisterGreeterServer(s grpc.ServiceRegistrar, srv GreeterServer) {
-	s.RegisterService(&Greeter_ServiceDesc, srv)
+func RegisterGameServiceServer(s grpc.ServiceRegistrar, srv GameServiceServer) {
+	s.RegisterService(&GameService_ServiceDesc, srv)
 }
 
-func _Greeter_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloRequest)
+func _GameService_EnterGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnterGameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GreeterServer).SayHello(ctx, in)
+		return srv.(GameServiceServer).EnterGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/Greeter/SayHello",
+		FullMethod: "/GameService/EnterGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GreeterServer).SayHello(ctx, req.(*HelloRequest))
+		return srv.(GameServiceServer).EnterGame(ctx, req.(*EnterGameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Greeter_ServiceDesc is the grpc.ServiceDesc for Greeter service.
+func _GameService_Fire_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FireRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServiceServer).Fire(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/GameService/Fire",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServiceServer).Fire(ctx, req.(*FireRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// GameService_ServiceDesc is the grpc.ServiceDesc for GameService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Greeter_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "Greeter",
-	HandlerType: (*GreeterServer)(nil),
+var GameService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "GameService",
+	HandlerType: (*GameServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SayHello",
-			Handler:    _Greeter_SayHello_Handler,
+			MethodName: "EnterGame",
+			Handler:    _GameService_EnterGame_Handler,
+		},
+		{
+			MethodName: "Fire",
+			Handler:    _GameService_Fire_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
